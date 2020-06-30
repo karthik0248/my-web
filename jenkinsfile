@@ -1,0 +1,37 @@
+pipeline {
+   agent any
+   tools {
+     jdk 'jdk1.8'
+     maven 'maven3'
+   }
+   stages {
+     stage('pull repo'){
+    	steps {
+          git 'https://gitlab.com/jagarlamudirajesh34/test1.git'
+        }
+     }
+     stage('pull master'){
+    	steps {
+          sh 'git pull origin master'
+        }
+     }
+     stage('docker version check'){
+       steps{
+          echo 'docker version check'
+          sh 'docker --version'
+       }
+     }
+     stage('docker build image'){
+       steps{
+          echo 'docker build image'
+          sh 'docker build -t myng:1 .'
+       }
+     }
+     stage('docker con run'){
+       steps{
+          echo 'docker con run'
+          sh 'docker run --name myng -itd -p 80:80 myng:1'
+       }
+     }
+   }
+}
