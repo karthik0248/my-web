@@ -1,4 +1,4 @@
 FROM nginx
 COPY helo.php /etc/nginx/nginx.conf
-RUN chmod +r /etc/nginx/nginx.conf
+RUN chmod +r /etc/nginx/nginx.conf/helo.php
 CMD ["nginx", "-g", "daemon off;"]
